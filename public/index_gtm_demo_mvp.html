@@ -1,0 +1,72 @@
+<html lang="en">
+<head>
+  <script>
+    // Initialize the dataLayer
+    window.dataLayer = window.dataLayer || [];
+
+    // Function to get query parameter by name
+    function getQueryParam(param) {
+      const urlParams = new URLSearchParams(window.location.search);
+      return urlParams.get(param);
+    }
+
+    const currentTimestamp = Math.floor(new Date().getTime() / 1000);
+    const clickId = getQueryParam('rdt_cid');// || 'default_click_id'; // Replace 'default_click_id' with a fallback value if needed
+
+    // Push data to the dataLayer
+    window.dataLayer.push({
+      'email_address': 'ana.checkout@sample.com',
+      'conversion_id': 'ad6c2c76bc74b28c' + currentTimestamp,
+      'external_id': 'c74b2ad6c2c76b8c' + currentTimestamp
+    });
+  </script>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WH4MGM94');</script>
+  <!-- End Google Tag Manager -->
+    <script>
+       function callServer() {
+        const data = {
+          'CONVERSION_ID': 'B00000122',
+          'EMAIL_VALUE': 'ana@sample.com',
+          event: 'PageVisit',
+          page: 'home',
+          referrer: 'https://example.com',
+          userId: '12345'
+        };
+
+        //fetch('https://gtm-s2s-demo.onrender.com/collect', {
+        fetch('https://47bf-98-37-234-223.ngrok-free.app/collect', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => {
+          console.log('Server response:', response);
+          //return response.json();
+          return response;
+        })
+        .then(data => {
+          console.log('Server data:', data);
+          document.getElementById('text_display').textContent = 'Purchase successful!';
+        })
+        .catch(error => {
+          console.error('Error:', error);
+        });
+
+        console.log('finished the whole server stuff')
+      }
+  </script>
+</head>
+<body style="background-color: \#e6e6e6;">
+  <div style="font-family: Helvetica Neue,Helvetica,Arial,sans-serif;text-align:center;padding:30px 15px;border:1px solid \#fff;background-color: \#FF4500;color: \#fff;margin-top: 50px;margin-right: 30%;margin-left: 30%;">
+    <h2 style="font-weight: 50;">Welcome home</h2>
+    <button id="purchase_button" onclick="callServer()">Report Purchase to CAPI</button>
+  </div>
+</body>
+</html>
