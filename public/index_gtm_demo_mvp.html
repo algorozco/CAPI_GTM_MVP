@@ -16,9 +16,13 @@
     // Push data to the dataLayer
     window.dataLayer.push({
       'email_address': 'ana.checkout@sample.com',
-      'conversion_id': 'ad6c2c76bc74b28c' + currentTimestamp,
-      'external_id': 'c74b2ad6c2c76b8c' + currentTimestamp,
-      'click_id':clickId
+      'conversionID': currentTimestamp+'ad6c2c76bc74b28c',
+      'external_id': currentTimestamp+'c74b2ad6c2c76b8c',
+      'click_id':clickId,
+      'currency':'USD',
+      'transaction_value':234234,
+      'item_count':2
+
     });
   </script>
   <!-- Google Tag Manager -->
@@ -41,7 +45,7 @@
         };
 
         //fetch('https://gtm-s2s-demo.onrender.com/collect', {
-        fetch('https://47bf-98-37-234-223.ngrok-free.app/collect', {
+        fetch('https://capi-gtm-mvp.onrender.com/collect', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
