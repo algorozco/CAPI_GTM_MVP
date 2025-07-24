@@ -10,29 +10,38 @@
       return urlParams.get(param);
     }
 
-    const currentTimestamp = Math.floor(new Date().getTime() / 1000);
     const modifiedTimestamp = Math.floor(new Date().getTime() / 5000);
+    const external_id = modifiedTimestamp+'c74b2ad6c2c76b8c';
     const clickId = getQueryParam('rdt_cid');// || 'default_click_id'; // Replace 'default_click_id' with a fallback value if needed
+    const ip_address = '192.2.2.2';
+    const value = 554234;
+
+    const currentTimestamp = Math.floor(new Date().getTime() / 1000);
+    const conversionID = generateConversionID(email, value, currentTimestamp);
+
+    async function generateConversionID(ip_address, value, timestamp) {
+          const str = ip_address + value + timestamp;
+            // Encode the input string as a Uint8Array
+            const inputBuffer = new TextEncoder().encode(str);
+            // Use the Web Crypto API to generate the SHA-256 hash
+            const hashBuffer = await crypto.subtle.digest('SHA-256', inputBuffer);
+            // Convert the buffer to a byte array
+            const hashArray = Array.from(new Uint8Array(hashBuffer));
+            // Convert bytes to hex string
+            const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+            return hashHex;
+        }
 
     // Push data to the dataLayer
     window.dataLayer.push({
-      'email_address': 'ana.checkout@sample.com',
-      'conversionID': currentTimestamp+'ad6c2c76bc74b27e',
+      'ip_address': ip_address,
+      'conversionID': conversionID,
       'external_id': modifiedTimestamp+'c74b2ad6c2c76b8c',
      // 'click_id':clickId,
       'currency':'USD',
-      'transaction_value':554234,
+      'transaction_value':value,
       'item_count':8,
-      'products_array':[{
-                    "category": "test",
-                    "id": "22334",
-                    "name": "anatestignore"
-                },
-                {
-                    "category": "another_category",
-                    "id": "77238",
-                    "name": "another_product"
-                }]
+      'custom_ip_override':'123.177.17.99'
     });
   </script>
   <!-- Google Tag Manager -->
@@ -51,10 +60,11 @@
           event: 'PageVisit',
           page: 'home',
           referrer: 'https://example.com',
-          userId: '12345'
+          userId: '12345',
+          'custom_ip_override':'123.177.17.99'
         };
 
-        fetch('https://capi-gtm-mvp.onrender.com/collect', {
+        fetch('https://e91a-98-37-234-223.ngrok-free.app', {
        // fetch('https://capi-gtm-mvp.onrender.com/collect', {
           method: 'POST',
           headers: {
