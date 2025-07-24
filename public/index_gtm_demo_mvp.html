@@ -1,9 +1,6 @@
 <html lang="en">
 <head>
   <script>
-    // Initialize the dataLayer
-    window.dataLayer = window.dataLayer || [];
-
     // Function to get query parameter by name
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -31,6 +28,8 @@
             const hashHex = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
             return hashHex;
         }
+    // Initialize the dataLayer
+    window.dataLayer = window.dataLayer || [];
 
     // Push data to the dataLayer
     window.dataLayer.push({
