@@ -1,5 +1,13 @@
 <html lang="en">
 <head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WH4MGM94');
+  </script>
+  <!-- End Google Tag Manager -->
   <script>
     // Initialize the dataLayer
     window.dataLayer = window.dataLayer || [];
@@ -7,7 +15,7 @@
     // Push data to the dataLayer
     window.dataLayer.push({
       'ip_address': ip_address,
-      'conversionID': conversionID,
+      'conversionID_DL': conversionID_DL,
       'external_id': modifiedTimestamp+'c74b2ad6c2c76b8c',
      // 'click_id':clickId,
       'currency':'USD',
@@ -15,7 +23,7 @@
       'item_count':8,
       'custom_ip_override':'123.177.17.99'
     });
-    
+
     // Function to get query parameter by name
     function getQueryParam(param) {
       const urlParams = new URLSearchParams(window.location.search);
@@ -29,7 +37,7 @@
     const value = 554234;
 
     const currentTimestamp = Math.floor(new Date().getTime() / 1000);
-    const conversionID = generateConversionID(email, value, currentTimestamp);
+    const conversionID_DL = generateConversionID(email, value, currentTimestamp);
 
     async function generateConversionID(ip_address, value, timestamp) {
           const str = ip_address + value + timestamp;
@@ -44,14 +52,6 @@
             return hashHex;
         }
   </script>
-  <!-- Google Tag Manager -->
-  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WH4MGM94');
-  </script>
-  <!-- End Google Tag Manager -->
     <script>
        function callServer() {
         const data = {
